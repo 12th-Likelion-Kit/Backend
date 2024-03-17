@@ -1,7 +1,9 @@
 package com.likelionkit.board.domain.user.model;
 
+import com.likelionkit.board.domain.user.dto.SignUpRequest;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -27,5 +29,11 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRole role = UserRole.USER;
+
+    @Builder
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 }
