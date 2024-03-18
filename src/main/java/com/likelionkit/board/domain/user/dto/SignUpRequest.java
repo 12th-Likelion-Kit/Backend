@@ -2,6 +2,7 @@ package com.likelionkit.board.domain.user.dto;
 
 import com.likelionkit.board.domain.user.model.User;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 @Getter
@@ -11,6 +12,7 @@ public class SignUpRequest {
     private String userName;
 
     @NotBlank(message = "비밀번호는 빈칸일 수 없습니다.")
+    @Size(min = 6, max = 12)
     private String password;
 
     public static User toEntity(SignUpRequest request) {

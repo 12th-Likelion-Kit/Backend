@@ -12,4 +12,9 @@ public class ErrorResponse {
         this.status = errorCode.getStatus();
         this.message = errorCode.getMessage();
     }
+
+    public ErrorResponse(HttpStatus status, String message) {
+        this.status = status;
+        this.message = message;
+    }
 }
