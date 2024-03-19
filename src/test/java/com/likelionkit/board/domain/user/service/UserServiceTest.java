@@ -36,11 +36,11 @@ public class UserServiceTest {
         User user = new User(1L,"test","123456", UserRole.USER);
         when(userRepository.save(any(User.class))).thenReturn(user);
 
-        SignUpResponse newUserResponse = userService.signUp(request);
+        SignUpResponse savedUserResponse = userService.signUp(request);
 
-        assertThat(newUserResponse.getId()).isEqualTo(user.getId());
-        assertThat(newUserResponse.getUserName()).isEqualTo(user.getUserName());
-        assertThat(newUserResponse.getRole()).isEqualTo(user.getRole());
+        assertThat(savedUserResponse.getId()).isEqualTo(user.getId());
+        assertThat(savedUserResponse.getUserName()).isEqualTo(user.getUserName());
+        assertThat(savedUserResponse.getRole()).isEqualTo(user.getRole());
     }
 
     @Test
