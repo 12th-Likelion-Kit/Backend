@@ -2,6 +2,8 @@ package com.likelionkit.board.domain.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.likelionkit.board.domain.user.dto.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.SignUpResponse;
+import com.likelionkit.board.domain.user.model.UserRole;
 import com.likelionkit.board.domain.user.service.UserService;
 import com.likelionkit.board.global.base.exception.CustomException;
 import com.likelionkit.board.global.base.exception.ErrorCode;
@@ -17,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -42,6 +45,8 @@ public class UserControllerTest {
         void 회원가입_성공() throws Exception {
             // given
             SignUpRequest request = new SignUpRequest("test","123456");
+            SignUpResponse response = new SignUpResponse(1L,"test", UserRole.USER);
+            given(userService.signUp(any(SignUpRequest.class))).willReturn(response);
 
             //when -> then
             mockMvc.perform(post("/api/users/sign-up")
@@ -49,6 +54,9 @@ public class UserControllerTest {
                             .content(objectMapper.writeValueAsString(request)))
                     //then
                     .andExpect(status().isCreated())
+                    .andExpect(jsonPath("$.id").value(1L))
+                    .andExpect(jsonPath("$.userName").value("test"))
+                    .andExpect(jsonPath("$.role").value("USER"))
                     .andDo(print());
         }
 
