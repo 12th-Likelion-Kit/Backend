@@ -7,6 +7,7 @@ import com.likelionkit.board.domain.user.repository.UserRepository;
 import com.likelionkit.board.global.base.exception.CustomException;
 import com.likelionkit.board.global.base.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
@@ -25,7 +27,10 @@ public class UserService {
         });
 
         // 새로운 User Entity를 만들어서 DB에 저장
-        User newUser = userRepository.save(SignUpRequest.toEntity(request));
+        User newUser = userRepository.save(SignUpRequest.toEntity(
+                request.getUserName(),
+                passwordEncoder.encode(request.getPassword()))); // 비밀번호 해싱
+
         return SignUpResponse.fromUser(newUser);
     }
 }
