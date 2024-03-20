@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -23,21 +24,28 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
+
     @Mock
     private UserRepository userRepository;
 
     @InjectMocks
     private UserService userService;
 
+    @Mock
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Test
     void 회원가입_성공() {
         // given
         SignUpRequest request = new SignUpRequest("test","123456");
         User user = new User(1L,"test","123456", UserRole.USER);
+        when(passwordEncoder.encode(anyString())).thenReturn("encrypt_password");
         when(userRepository.save(any(User.class))).thenReturn(user);
 
+        // when
         SignUpResponse savedUserResponse = userService.signUp(request);
 
+        // then
         assertThat(savedUserResponse.getId()).isEqualTo(user.getId());
         assertThat(savedUserResponse.getUserName()).isEqualTo(user.getUserName());
         assertThat(savedUserResponse.getRole()).isEqualTo(user.getRole());
