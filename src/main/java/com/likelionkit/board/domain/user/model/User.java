@@ -3,6 +3,7 @@ package com.likelionkit.board.domain.user.model;
 import com.likelionkit.board.domain.user.dto.SignUpRequest;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 @SQLDelete(sql = "UPDATE users SET deleted_at = NOW() where id=?")
