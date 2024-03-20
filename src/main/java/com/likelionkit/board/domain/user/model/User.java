@@ -1,6 +1,5 @@
 package com.likelionkit.board.domain.user.model;
 
-import com.likelionkit.board.domain.user.dto.SignUpRequest;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor

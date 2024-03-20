@@ -1,7 +1,7 @@
 package com.likelionkit.board.domain.user.controller;
 
-import com.likelionkit.board.domain.user.dto.SignUpRequest;
-import com.likelionkit.board.domain.user.dto.SignUpResponse;
+import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
 import com.likelionkit.board.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +28,6 @@ public class UserController {
                 .status(HttpStatus.CREATED) // 201
                 .body(response);
     }
+
+    
 }

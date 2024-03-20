@@ -1,7 +1,7 @@
 package com.likelionkit.board.domain.user.service;
 
-import com.likelionkit.board.domain.user.dto.SignUpRequest;
-import com.likelionkit.board.domain.user.dto.SignUpResponse;
+import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
 import com.likelionkit.board.domain.user.model.User;
 import com.likelionkit.board.domain.user.model.UserRole;
 import com.likelionkit.board.domain.user.repository.UserRepository;

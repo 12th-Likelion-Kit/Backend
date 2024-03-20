@@ -1,4 +1,4 @@
-package com.likelionkit.board.domain.user.dto;
+package com.likelionkit.board.domain.user.dto.request;
 
 import com.likelionkit.board.domain.user.model.User;
 import jakarta.validation.constraints.NotBlank;

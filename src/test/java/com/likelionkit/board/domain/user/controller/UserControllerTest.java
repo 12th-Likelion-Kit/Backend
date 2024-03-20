@@ -1,8 +1,8 @@
 package com.likelionkit.board.domain.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.likelionkit.board.domain.user.dto.SignUpRequest;
-import com.likelionkit.board.domain.user.dto.SignUpResponse;
+import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
 import com.likelionkit.board.domain.user.model.UserRole;
 import com.likelionkit.board.domain.user.service.UserService;
 import com.likelionkit.board.global.base.exception.CustomException;
