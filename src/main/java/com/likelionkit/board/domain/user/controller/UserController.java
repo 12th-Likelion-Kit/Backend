@@ -1,7 +1,9 @@
 package com.likelionkit.board.domain.user.controller;
 
-import com.likelionkit.board.domain.user.dto.SignUpRequest;
-import com.likelionkit.board.domain.user.dto.SignUpResponse;
+import com.likelionkit.board.domain.user.dto.request.LoginRequest;
+import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.response.LoginResponse;
+import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
 import com.likelionkit.board.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,15 @@ public class UserController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED) // 201
+                .body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
+        LoginResponse response = userService.login(request);
+
+        return ResponseEntity
+                .status(HttpStatus.OK) // 200
                 .body(response);
     }
 }

@@ -1,4 +1,4 @@
-package com.likelionkit.board.domain.user.dto;
+package com.likelionkit.board.domain.user.dto.response;
 
 import com.likelionkit.board.domain.user.model.User;
 import com.likelionkit.board.domain.user.model.UserRole;

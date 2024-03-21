@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,14 +43,13 @@ public class UserRepositoryTest {
     void findByUserName_테스트() {
         // given
         User user = new User(1L,"test","123456", UserRole.USER);
+        userRepository.save(user);
 
         // when
-        User savedUser = userRepository.save(user);
+        Optional<User> savedUser = userRepository.findByUserName("test");
 
         // then
-        assertNotNull(savedUser);
-        assertEquals(user.getId(), savedUser.getId());
-        assertEquals(user.getUserName(), savedUser.getUserName());
-        assertEquals(user.getRole(), savedUser.getRole());
+        assertTrue(savedUser.isPresent());
+        assertEquals(user.getId(), savedUser.get().getId());
     }
 }
