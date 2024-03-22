@@ -4,7 +4,9 @@ import com.likelionkit.board.domain.user.dto.request.LoginRequest;
 import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
 import com.likelionkit.board.domain.user.dto.response.LoginResponse;
 import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
+import com.likelionkit.board.domain.user.dto.response.UserResponse;
 import com.likelionkit.board.domain.user.model.User;
+import com.likelionkit.board.domain.user.model.UserPrincipal;
 import com.likelionkit.board.domain.user.repository.UserRepository;
 import com.likelionkit.board.global.base.exception.CustomException;
 import com.likelionkit.board.global.base.exception.ErrorCode;
@@ -54,4 +56,9 @@ public class UserService {
         return new LoginResponse(accessToken);
     }
 
+    public UserResponse me(UserPrincipal user) {
+        return userRepository.findByUserName(user.getUsername())
+                .map(UserResponse::new)
+                .orElseThrow(() -> new CustomException(ErrorCode.DUPLICATED_USER_NAME));
+    }
 }
