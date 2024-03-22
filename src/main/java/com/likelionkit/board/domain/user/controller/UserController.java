@@ -1,18 +1,18 @@
 package com.likelionkit.board.domain.user.controller;
 
+import com.likelionkit.board.domain.user.dto.response.UserResponse;
 import com.likelionkit.board.domain.user.dto.request.LoginRequest;
 import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
 import com.likelionkit.board.domain.user.dto.response.LoginResponse;
 import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
+import com.likelionkit.board.domain.user.model.UserPrincipal;
 import com.likelionkit.board.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -34,6 +34,15 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
         LoginResponse response = userService.login(request);
+
+        return ResponseEntity
+                .status(HttpStatus.OK) // 200
+                .body(response);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse> me(@AuthenticationPrincipal UserPrincipal user) {
+        UserResponse response = userService.me(user);
 
         return ResponseEntity
                 .status(HttpStatus.OK) // 200
