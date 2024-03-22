@@ -49,8 +49,9 @@ public class UserService {
         }
 
         // 토큰 발급
-        String accessToken = tokenProvider.createToken(savedUser.getId(), savedUser.getRole());
+        String accessToken = tokenProvider.createToken(savedUser.getUserName(), savedUser.getRole());
 
         return new LoginResponse(accessToken);
     }
+
 }
