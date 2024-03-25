@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(value = {UserController.class, SecurityConfig.class})
+@WebMvcTest(value = {UserController.class}, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 public class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
