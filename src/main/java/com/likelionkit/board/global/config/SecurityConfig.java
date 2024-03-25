@@ -1,5 +1,6 @@
 package com.likelionkit.board.global.config;
 
+import com.likelionkit.board.global.jwt.exception.CustomAuthenticationEntryPoint;
 import com.likelionkit.board.global.jwt.filter.JwtAuthenticationFilter;
 import com.likelionkit.board.global.jwt.utils.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final TokenProvider tokenProvider;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain httpSecurity(HttpSecurity http) throws Exception {
@@ -29,6 +31,8 @@ public class SecurityConfig {
                 .sessionManagement((s) -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(e -> e.authenticationEntryPoint(customAuthenticationEntryPoint))
+
         ;
 
         return http.build();
