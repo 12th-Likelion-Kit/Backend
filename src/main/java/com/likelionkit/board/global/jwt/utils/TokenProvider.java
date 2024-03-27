@@ -58,7 +58,7 @@ public class TokenProvider implements AuthenticationProvider {
                     .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
             log.error("JWT({})가 만료되없습니다. 만료일: {}", token, e.getClaims().getExpiration());
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             log.error("JWT({})의 유효성(형식, 서명 등)이 올바르지 않습니다.", token);
         }
     }
