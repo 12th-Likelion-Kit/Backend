@@ -1,6 +1,5 @@
 package com.likelionkit.board.domain.user.service;
 
-import com.likelionkit.board.domain.user.model.User;
 import com.likelionkit.board.domain.user.model.UserPrincipal;
 import com.likelionkit.board.domain.user.repository.UserRepository;
 import com.likelionkit.board.global.base.exception.CustomException;
@@ -21,6 +20,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username)
                 .map(UserPrincipal::new)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER_NAME));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
     }
 }

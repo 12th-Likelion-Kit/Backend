@@ -53,7 +53,7 @@ public class UserController {
     @PatchMapping
     public ResponseEntity<UserResponse> update(@AuthenticationPrincipal UserPrincipal user,
                                                @RequestBody UserUpdateRequest request) {
-        UserResponse response = userService.update(user.getUser(), request);
+        UserResponse response = userService.update(user.getUserId(), request);
 
         return ResponseEntity
                 .status(HttpStatus.OK) // 200
@@ -62,7 +62,7 @@ public class UserController {
 
     @DeleteMapping
     public ResponseEntity<Void> delete(@AuthenticationPrincipal UserPrincipal user) {
-        userService.delete(user.getUser());
+        userService.delete(user.getUserId());
 
         return ResponseEntity
                 .status(HttpStatus.OK) // 200
