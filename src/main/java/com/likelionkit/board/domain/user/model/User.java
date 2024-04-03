@@ -1,21 +1,21 @@
 package com.likelionkit.board.domain.user.model;
 
+import com.likelionkit.board.domain.post.model.Board;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-@SQLDelete(sql = "UPDATE users SET deleted_at = NOW() where id=?")
-@SQLRestriction("deleted_at is NULL")
+@Table(name = "user")
 public class User extends BaseEntity {
 
     @Id
@@ -36,5 +36,9 @@ public class User extends BaseEntity {
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public void updateUserName(String userName) {
+        this.userName = userName;
     }
 }
