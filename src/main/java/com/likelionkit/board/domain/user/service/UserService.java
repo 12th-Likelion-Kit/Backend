@@ -2,6 +2,7 @@ package com.likelionkit.board.domain.user.service;
 
 import com.likelionkit.board.domain.user.dto.request.LoginRequest;
 import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.request.UserUpdateRequest;
 import com.likelionkit.board.domain.user.dto.response.LoginResponse;
 import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
 import com.likelionkit.board.domain.user.dto.response.UserResponse;
@@ -60,5 +61,18 @@ public class UserService {
         return userRepository.findByUserName(user.getUsername())
                 .map(UserResponse::new)
                 .orElseThrow(() -> new CustomException(ErrorCode.DUPLICATED_USER_NAME));
+    }
+
+    @Transactional
+    public UserResponse update(User user, UserUpdateRequest request) {
+        User savedUser = userRepository.findByUserName(user.getUserName())
+                .orElseThrow(() -> new CustomException(ErrorCode.DUPLICATED_USER_NAME));
+        savedUser.updateUserName(request.getUserName()); // 더티체킹 설명
+        return new UserResponse(savedUser);
+    }
+
+    @Transactional
+    public void delete(User user) {
+        userRepository.deleteById(user.getId());
     }
 }
