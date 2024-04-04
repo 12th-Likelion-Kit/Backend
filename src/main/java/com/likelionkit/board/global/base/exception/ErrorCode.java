@@ -13,6 +13,8 @@ public enum ErrorCode {
     MISMATCH_USER_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
     NOT_AUTHORIZED_TOKEN(HttpStatus.UNAUTHORIZED, "권한 정보가 없는 토큰입니다."),
     AUTHORIZED_FAIL(HttpStatus.UNAUTHORIZED, "인증에 실패했습니다."),
+    NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "해당 Board 를 찾을 수 없습니다."),
+    NOT_OWNER_BOARD(HttpStatus.NOT_FOUND, "해당 Board 의 주인이 아닙니다."),
 
     ;
 

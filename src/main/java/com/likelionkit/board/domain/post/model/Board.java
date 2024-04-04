@@ -1,5 +1,6 @@
 package com.likelionkit.board.domain.post.model;
 
+import com.likelionkit.board.domain.post.dto.request.BoardPostRequest;
 import com.likelionkit.board.domain.user.model.User;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -37,4 +38,13 @@ public class Board extends BaseEntity {
         this.content = content;
     }
 
+    public void addUser(User user) {
+        this.user = user;
+        user.getBoards().add(this); // 양방향 관계 설정
+    }
+
+    public void update(BoardPostRequest request) {
+        this.title = request.getTitle();
+        this.content = request.getContent();
+    }
 }
