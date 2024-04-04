@@ -26,7 +26,7 @@ public class UserRepositoryTest {
     @Test
     void BaseEntity_테스트() {
         // given
-        User user = new User(1L,"test","123456", UserRole.USER);
+        User user = new User(1L,"test","123456", UserRole.USER, null);
 
         // when
         User savedUser = userRepository.save(user);
@@ -42,7 +42,7 @@ public class UserRepositoryTest {
     @Test
     void findByUserName_테스트() {
         // given
-        User user = new User(1L,"test","123456", UserRole.USER);
+        User user = new User(1L,"test","123456", UserRole.USER, null);
         userRepository.save(user);
 
         // when
