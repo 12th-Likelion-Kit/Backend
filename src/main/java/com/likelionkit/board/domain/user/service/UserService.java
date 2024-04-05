@@ -2,6 +2,7 @@ package com.likelionkit.board.domain.user.service;
 
 import com.likelionkit.board.domain.user.dto.request.LoginRequest;
 import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
+import com.likelionkit.board.domain.user.dto.request.UserUpdateRequest;
 import com.likelionkit.board.domain.user.dto.response.LoginResponse;
 import com.likelionkit.board.domain.user.dto.response.SignUpResponse;
 import com.likelionkit.board.domain.user.dto.response.UserResponse;
@@ -43,7 +44,7 @@ public class UserService {
     public LoginResponse login(LoginRequest request) {
         // DB에 회원정보가 있는지 검사
         User savedUser = userRepository.findByUserName(request.getUserName())
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER_NAME));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
         // 비밀번호 검사
         if(!passwordEncoder.matches(request.getPassword(), savedUser.getPassword())){
@@ -60,5 +61,18 @@ public class UserService {
         return userRepository.findByUserName(user.getUsername())
                 .map(UserResponse::new)
                 .orElseThrow(() -> new CustomException(ErrorCode.DUPLICATED_USER_NAME));
+    }
+
+    @Transactional
+    public UserResponse update(Long userId, UserUpdateRequest request) {
+        User savedUser = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.DUPLICATED_USER_NAME));
+        savedUser.updateUserName(request.getUserName()); // 더티체킹 설명
+        return new UserResponse(savedUser);
+    }
+
+    @Transactional
+    public void delete(Long userId) {
+        userRepository.deleteById(userId);
     }
 }

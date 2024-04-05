@@ -40,7 +40,7 @@ public class UserServiceTest {
     private TokenProvider tokenProvider;
 
     private User createUser() {
-        return new User(1L,"test","123456", UserRole.USER);
+        return new User(1L,"test","123456", UserRole.USER, null);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserServiceTest {
         User user = createUser();
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(anyString(),anyString())).thenReturn(true);
-        when(tokenProvider.createToken(anyLong(),any(UserRole.class))).thenReturn("ACCESS_TOKEN");
+        when(tokenProvider.createToken(any(),any(UserRole.class))).thenReturn("ACCESS_TOKEN");
 
         // when
         LoginResponse response = userService.login(request);

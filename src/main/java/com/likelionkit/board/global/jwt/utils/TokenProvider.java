@@ -58,7 +58,7 @@ public class TokenProvider implements AuthenticationProvider {
                     .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
             log.error("JWT({})가 만료되없습니다. 만료일: {}", token, e.getClaims().getExpiration());
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             log.error("JWT({})의 유효성(형식, 서명 등)이 올바르지 않습니다.", token);
         }
     }
@@ -74,14 +74,15 @@ public class TokenProvider implements AuthenticationProvider {
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException { // 실제 인증로직이 담길 메서드
         UserPrincipal userDetails = (UserPrincipal) customUserDetailsService.loadUserByUsername((String) authentication.getPrincipal());
 
-        return new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities()); // 인증된 생성자로 Authentication 객체가 생성
     }
 
+    //
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

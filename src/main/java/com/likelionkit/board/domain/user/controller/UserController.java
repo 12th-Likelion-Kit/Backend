@@ -1,5 +1,6 @@
 package com.likelionkit.board.domain.user.controller;
 
+import com.likelionkit.board.domain.user.dto.request.UserUpdateRequest;
 import com.likelionkit.board.domain.user.dto.response.UserResponse;
 import com.likelionkit.board.domain.user.dto.request.LoginRequest;
 import com.likelionkit.board.domain.user.dto.request.SignUpRequest;
@@ -47,5 +48,24 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.OK) // 200
                 .body(response);
+    }
+
+    @PatchMapping
+    public ResponseEntity<UserResponse> update(@AuthenticationPrincipal UserPrincipal user,
+                                               @RequestBody UserUpdateRequest request) {
+        UserResponse response = userService.update(user.getUserId(), request);
+
+        return ResponseEntity
+                .status(HttpStatus.OK) // 200
+                .body(response);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@AuthenticationPrincipal UserPrincipal user) {
+        userService.delete(user.getUserId());
+
+        return ResponseEntity
+                .status(HttpStatus.OK) // 200
+                .build();
     }
 }

@@ -9,7 +9,6 @@ import com.likelionkit.board.domain.user.model.UserRole;
 import com.likelionkit.board.domain.user.service.UserService;
 import com.likelionkit.board.global.base.exception.CustomException;
 import com.likelionkit.board.global.base.exception.ErrorCode;
-import com.likelionkit.board.global.config.SecurityConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(value = {UserController.class, SecurityConfig.class})
+@WebMvcTest(value = {UserController.class}, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 public class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
@@ -137,7 +136,7 @@ public class UserControllerTest {
         @Test
         void 회원가입되지_않은_유저라면_로그인_실패() throws Exception{
             // given
-            doThrow(new CustomException(ErrorCode.NOT_FOUND_USER_NAME)).when(userService).login(any(LoginRequest.class));
+            doThrow(new CustomException(ErrorCode.NOT_FOUND_USER)).when(userService).login(any(LoginRequest.class));
 
             // when
             mockMvc.perform(post(loginUrl)

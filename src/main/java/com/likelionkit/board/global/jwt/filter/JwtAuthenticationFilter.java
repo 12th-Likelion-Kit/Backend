@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,8 +21,8 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private static final String BEARER_PREFIX = "Bearer ";
-
     private final TokenProvider tokenProvider;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -33,7 +34,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String userName = tokenProvider.getUserNameFromToken(token);
 
             try {
-                Authentication authentication = tokenProvider.authenticate(new UsernamePasswordAuthenticationToken(userName,""));
+                // 아직 인증되지 않은 Authentication 객체 생성
+                Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,""));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (RuntimeException e) { // server error
                 log.error("JWT({})로부터 인증정보를 만드는데 실패했습니다: {}", token, e.getMessage());

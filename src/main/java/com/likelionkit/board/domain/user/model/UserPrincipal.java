@@ -1,5 +1,6 @@
 package com.likelionkit.board.domain.user.model;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,28 +8,32 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+@Getter
 public class UserPrincipal implements UserDetails {
 
-    private final User user;
+    private final Long userId;
+
+    private final UserRole role;
 
     public UserPrincipal(User user) {
-        this.user = user;
+        this.userId = user.getId();
+        this.role = user.getRole();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
+        GrantedAuthority authority = new SimpleGrantedAuthority(role.name());
         return Collections.singleton(authority);
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return null;
     }
 
     @Override
@@ -50,4 +55,6 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
