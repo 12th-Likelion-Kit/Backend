@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 리스트</title>
+</head>
+<body>
+<h1>회원 리스트</h1>
+<div>
+  <ul>
+    <!-- 회원 리스트를 반복해서 표시 -->
+    <li th:each="member : ${members}">
+      <span th:text="${member.name}">이름</span>,
+      <span th:text="${member.age}">나이</span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
