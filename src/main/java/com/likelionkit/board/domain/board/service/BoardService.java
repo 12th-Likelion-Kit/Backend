@@ -1,10 +1,10 @@
-package com.likelionkit.board.domain.post.service;
+package com.likelionkit.board.domain.board.service;
 
-import com.likelionkit.board.domain.post.dto.request.BoardPostRequest;
-import com.likelionkit.board.domain.post.dto.response.BoardFindResponse;
-import com.likelionkit.board.domain.post.dto.response.BoardPostResponse;
-import com.likelionkit.board.domain.post.model.Board;
-import com.likelionkit.board.domain.post.repository.BoardRepository;
+import com.likelionkit.board.domain.board.dto.request.BoardPostRequest;
+import com.likelionkit.board.domain.board.dto.response.BoardFindResponse;
+import com.likelionkit.board.domain.board.dto.response.BoardPostResponse;
+import com.likelionkit.board.domain.board.model.Board;
+import com.likelionkit.board.domain.board.repository.BoardRepository;
 import com.likelionkit.board.domain.user.model.User;
 import com.likelionkit.board.domain.user.repository.UserRepository;
 import com.likelionkit.board.global.base.exception.CustomException;

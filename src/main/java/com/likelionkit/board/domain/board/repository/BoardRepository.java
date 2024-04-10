@@ -1,6 +1,6 @@
-package com.likelionkit.board.domain.post.repository;
+package com.likelionkit.board.domain.board.repository;
 
-import com.likelionkit.board.domain.post.model.Board;
+import com.likelionkit.board.domain.board.model.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

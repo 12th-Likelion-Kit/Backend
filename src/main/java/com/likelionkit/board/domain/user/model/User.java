@@ -1,6 +1,6 @@
 package com.likelionkit.board.domain.user.model;
 
-import com.likelionkit.board.domain.post.model.Board;
+import com.likelionkit.board.domain.board.model.Board;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

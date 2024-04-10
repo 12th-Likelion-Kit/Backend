@@ -1,9 +1,9 @@
-package com.likelionkit.board.domain.post.controller;
+package com.likelionkit.board.domain.board.controller;
 
-import com.likelionkit.board.domain.post.dto.request.BoardPostRequest;
-import com.likelionkit.board.domain.post.dto.response.BoardFindResponse;
-import com.likelionkit.board.domain.post.dto.response.BoardPostResponse;
-import com.likelionkit.board.domain.post.service.BoardService;
+import com.likelionkit.board.domain.board.dto.request.BoardPostRequest;
+import com.likelionkit.board.domain.board.dto.response.BoardFindResponse;
+import com.likelionkit.board.domain.board.dto.response.BoardPostResponse;
+import com.likelionkit.board.domain.board.service.BoardService;
 import com.likelionkit.board.domain.user.model.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

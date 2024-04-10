@@ -1,6 +1,6 @@
-package com.likelionkit.board.domain.post.model;
+package com.likelionkit.board.domain.board.model;
 
-import com.likelionkit.board.domain.post.dto.request.BoardPostRequest;
+import com.likelionkit.board.domain.board.dto.request.BoardPostRequest;
 import com.likelionkit.board.domain.user.model.User;
 import com.likelionkit.board.global.base.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 
 @Getter
 @NoArgsConstructor

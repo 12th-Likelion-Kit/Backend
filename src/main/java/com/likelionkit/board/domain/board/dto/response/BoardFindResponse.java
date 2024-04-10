@@ -1,7 +1,7 @@
-package com.likelionkit.board.domain.post.dto.response;
+package com.likelionkit.board.domain.board.dto.response;
 
 
-import com.likelionkit.board.domain.post.model.Board;
+import com.likelionkit.board.domain.board.model.Board;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
