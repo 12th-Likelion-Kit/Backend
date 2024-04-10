@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/users")
@@ -67,5 +69,14 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.OK) // 200
                 .build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> findAll() {
+        List<UserResponse> response = userService.findAll();
+
+        return ResponseEntity
+                .status(HttpStatus.OK) // 200
+                .body(response);
     }
 }

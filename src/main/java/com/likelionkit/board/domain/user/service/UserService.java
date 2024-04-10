@@ -17,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -74,5 +76,11 @@ public class UserService {
     @Transactional
     public void delete(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    public List<UserResponse> findAll() {
+        return userRepository.findAll().stream()
+                .map(UserResponse::new)
+                .toList();
     }
 }

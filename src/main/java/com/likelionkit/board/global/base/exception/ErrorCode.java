@@ -15,6 +15,7 @@ public enum ErrorCode {
     AUTHORIZED_FAIL(HttpStatus.UNAUTHORIZED, "인증에 실패했습니다."),
     NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "해당 Board 를 찾을 수 없습니다."),
     NOT_OWNER_BOARD(HttpStatus.NOT_FOUND, "해당 Board 의 주인이 아닙니다."),
+    ACCESS_DENIED(HttpStatus.FORBIDDEN, "권한이 없습니다."),
 
     ;
 

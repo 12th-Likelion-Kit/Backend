@@ -30,7 +30,7 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.USER;
+    private UserRole role;
 
     @OneToMany(mappedBy = "user")
     private List<Board> boards = new ArrayList<>();
@@ -39,6 +39,7 @@ public class User extends BaseEntity {
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        this.role = UserRole.ROLE_USER;
     }
 
     public void updateUserName(String userName) {

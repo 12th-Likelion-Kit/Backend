@@ -40,7 +40,7 @@ public class UserServiceTest {
     private TokenProvider tokenProvider;
 
     private User createUser() {
-        return new User(1L,"test","123456", UserRole.USER, null);
+        return new User(1L,"test","123456", UserRole.ROLE_USER, null);
     }
 
     @Test

@@ -48,7 +48,7 @@ public class UserControllerTest {
         void 회원가입_성공() throws Exception {
             // given
             SignUpRequest request = new SignUpRequest("test","123456");
-            SignUpResponse response = new SignUpResponse(1L,"test", UserRole.USER);
+            SignUpResponse response = new SignUpResponse(1L,"test", UserRole.ROLE_USER);
             given(userService.signUp(any(SignUpRequest.class))).willReturn(response);
 
             //when -> then
