@@ -45,7 +45,7 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<UserResponse> me(@AuthenticationPrincipal UserPrincipal user) {
-        UserResponse response = userService.me(user);
+        UserResponse response = userService.me(user.getUserId());
 
         return ResponseEntity
                 .status(HttpStatus.OK) // 200
