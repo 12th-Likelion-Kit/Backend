@@ -13,20 +13,8 @@ public class MemberRepository {
     private Long sequence = 0L;
 
     public Member save(Member member) {
-        if (isInOtherMemberPassword(member)) {
-            return null;
-        }
         member.setId(++sequence);
         store.put(member.getId(), member);
         return member;
-    }
-
-    private boolean isInOtherMemberPassword(Member member) {
-        for (Member m : store.values()) {
-            if (member.equalsPassword(m)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
