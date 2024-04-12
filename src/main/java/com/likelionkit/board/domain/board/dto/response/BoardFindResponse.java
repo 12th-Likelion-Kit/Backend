@@ -20,6 +20,6 @@ public class BoardFindResponse {
         this.id = board.getId();
         this.title = board.getTitle();
         this.content = board.getContent();
-        this.userName = board.getUser().getUserName();
+        this.userName = board.getUser().getUserName(); // 객체 그래프 탐색
     }
 }

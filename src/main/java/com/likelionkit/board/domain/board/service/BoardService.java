@@ -31,11 +31,13 @@ public class BoardService {
         return new BoardPostResponse(savedboard);
     }
 
+    @Transactional(readOnly = true)
     public BoardFindResponse findBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_BOARD));
         return new BoardFindResponse(board);
     }
 
+    @Transactional(readOnly = true)
     public List<BoardFindResponse> findAll() {
         List<Board> boards = boardRepository.findAll();
 
