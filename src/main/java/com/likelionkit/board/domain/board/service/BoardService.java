@@ -10,11 +10,13 @@ import com.likelionkit.board.domain.user.repository.UserRepository;
 import com.likelionkit.board.global.base.exception.CustomException;
 import com.likelionkit.board.global.base.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class BoardService {
@@ -37,9 +39,15 @@ public class BoardService {
         return new BoardFindResponse(board);
     }
 
+    // N+1 문제 설명
     @Transactional(readOnly = true)
     public List<BoardFindResponse> findAll() {
         List<Board> boards = boardRepository.findAll();
+
+        // 모든 게시글을 조회할 때, 댓글의 개수도 궁금해
+        for(Board board : boards){
+            log.info("comment size = {}", board.getComments().size());
+        }
 
         return boards.stream()
                 .map(BoardFindResponse::new)
