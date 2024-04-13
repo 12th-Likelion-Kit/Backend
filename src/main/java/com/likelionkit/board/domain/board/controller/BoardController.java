@@ -6,6 +6,9 @@ import com.likelionkit.board.domain.board.dto.response.BoardPostResponse;
 import com.likelionkit.board.domain.board.service.BoardService;
 import com.likelionkit.board.domain.user.model.UserPrincipal;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -40,8 +43,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BoardFindResponse>> findAll() {
-        List<BoardFindResponse> response = boardService.findAll();
+    public ResponseEntity<Page<BoardFindResponse>> findAll(@PageableDefault(size = 10, page = 0) Pageable pageable) {
+        Page<BoardFindResponse> response = boardService.findAll(pageable);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

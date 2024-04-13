@@ -11,6 +11,8 @@ import com.likelionkit.board.global.base.exception.CustomException;
 import com.likelionkit.board.global.base.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,17 +43,10 @@ public class BoardService {
 
     // N+1 문제 설명
     @Transactional(readOnly = true)
-    public List<BoardFindResponse> findAll() {
-        List<Board> boards = boardRepository.findAll();
+    public Page<BoardFindResponse> findAll(Pageable pageable) {
+        Page<Board> boards = boardRepository.findAll(pageable);
 
-        // 모든 게시글을 조회할 때, 댓글의 개수도 궁금해
-        for(Board board : boards){
-            log.info("comment size = {}", board.getComments().size());
-        }
-
-        return boards.stream()
-                .map(BoardFindResponse::new)
-                .toList();
+        return boards.map(BoardFindResponse::new);
     }
 
     @Transactional
