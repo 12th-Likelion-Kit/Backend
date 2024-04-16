@@ -11,7 +11,6 @@
 ![image](https://github.com/DongHyeonka/Backend/assets/144816658/2f235775-a710-464f-add8-5c613edccbc6)
 
 4. 게시판 리스트 좋아요순 조회 -> http://localhost:8080/api/boards/updateList
-![image](https://github.com/DongHyeonka/Backend/assets/144816658/d55eafca-04e4-452b-94f6-2a1c2aa58c67)
 ![image](https://github.com/DongHyeonka/Backend/assets/144816658/9e391343-3887-4b48-b74d-edc93740edb5)
 내림차순 정렬
 
