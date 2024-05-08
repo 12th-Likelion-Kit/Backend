@@ -1,6 +1,5 @@
 package com.example.kdh2.service.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -45,7 +44,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public ResponseEntity<List<BoardListResponseDto>> getBoardList() {
-        List<BoardEntity> boardList = new ArrayList<>(boardRepository.getStore().values());
+        List<BoardEntity> boardList = boardRepository.AllBoards();
         List<BoardListResponseDto> responseList = boardList.stream()
             .map(BoardListResponseDto::new)
             .collect(Collectors.toList());
@@ -54,7 +53,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public ResponseEntity<List<BoardListResponseDto>> updateBoardByLikes(String order) {
-        List<BoardEntity> boardList = new ArrayList<>(boardRepository.getStore().values());
+        List<BoardEntity> boardList = boardRepository.AllBoards();
         
         boardList.sort(Comparator.comparingInt(BoardEntity::getLikeCount));
 

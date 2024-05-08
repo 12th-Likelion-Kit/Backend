@@ -1,14 +1,13 @@
 package com.example.kdh2.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.kdh2.entity.BoardEntity;
 
-import lombok.Getter;
-
-@Getter
 @Repository
 public class BoardRepository {
     private HashMap<Long, BoardEntity> store = new HashMap<>();
@@ -28,5 +27,9 @@ public class BoardRepository {
 
     public void delete(Long id) {
         store.remove(id);
+    }
+
+    public List<BoardEntity> AllBoards() {
+        return new ArrayList<>(store.values());
     }
 }
