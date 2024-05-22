@@ -16,10 +16,10 @@ public class SignUpRequest {
     @Size(min = 4, max = 12, message = "비밀번호는 4자리 이상 12자리 이하여야 합니다.")
     private String password;
 
-    public static User toEntity(SignUpRequest request) {
+    public static User toEntity(String username, String newPassword) {
         return User.builder()
-                .username(request.getUsername())
-                .password(request.getPassword())
+                .username(username)
+                .password(newPassword)
                 .build();
     }
 }
