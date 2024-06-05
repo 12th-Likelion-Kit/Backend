@@ -1,11 +1,14 @@
 package com.example.boardstudy.global.jwt;
 
+import com.example.boardstudy.domain.user.entity.UserPrincipal;
 import com.example.boardstudy.domain.user.entity.UserRole;
+import com.example.boardstudy.domain.user.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -18,8 +21,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class TokenProvider implements AuthenticationProvider {
+
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Value("${jwt.secret-key}")
     private String secretKey;
@@ -57,7 +63,8 @@ public class TokenProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         // UserDetailService를 통해 실제 데이터베이스에서 해당 user가 존재하는지 검사/가져오기
-        return null;
+        UserPrincipal userPrincipal = (UserPrincipal) customUserDetailsService.loadUserByUsername((String) authentication.getPrincipal());
+        return new UsernamePasswordAuthenticationToken(userPrincipal,"", userPrincipal.getAuthorities());
     }
 
     @Override

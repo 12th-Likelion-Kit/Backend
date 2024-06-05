@@ -1,16 +1,15 @@
 package com.example.boardstudy.domain.user.controller;
 
-import com.example.boardstudy.domain.user.dto.LoginRequest;
-import com.example.boardstudy.domain.user.dto.LoginResponse;
-import com.example.boardstudy.domain.user.dto.SignUpRequest;
+import com.example.boardstudy.domain.user.dto.user.*;
+import com.example.boardstudy.domain.user.entity.UserPrincipal;
 import com.example.boardstudy.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,4 +32,35 @@ public class UserController {
 
         return ResponseEntity.ok().body(response);
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> me(@AuthenticationPrincipal UserPrincipal user) {
+        UserDto response = userService.me(user.getUserId());
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/findAll")
+    public ResponseEntity<List<UserDto>> findAll() {
+        List<UserDto> response = userService.findAll();
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    // username 수정
+    @PatchMapping
+    public ResponseEntity<Void> update(@AuthenticationPrincipal UserPrincipal user,
+                                       @RequestBody @Valid UpdateUsernameRequest request) {
+        userService.update(user.getUserId(), request.getUsername());
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/me")
+    public ResponseEntity<Void> delete(@AuthenticationPrincipal UserPrincipal user) {
+        userService.delete(user.getUserId());
+
+        return ResponseEntity.ok().build();
+    }
+
 }
